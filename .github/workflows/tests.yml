@@ -6,7 +6,8 @@ on:
     branches: [main]
 
 env:
-  CLODORU_KEY: github-actions
+  DRIVER_TOKEN: github-actions
+  DRIVER_USER_ID: github-actions
   TOX_PARALLEL_NO_SPINNER: 1
 
 jobs:
