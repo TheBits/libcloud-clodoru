@@ -273,3 +273,27 @@
 | driver   |           |
 | ttl      |           |
 | extra    |           |
+
+## Разработка
+
+Для запуска тестов настроен tox. Для проверки коммитов настроен pre-commit.
+
+Так же в проекте настроена автоматический запуск tox в GitHub Actions.
+
+### Тесты
+
+Тесты запускаются через tox, внутри используется [pytest](https://pytest.org/).
+
+Для создания фикстур нужен установленный ключ окружения `DRIVER_TOKEN` с API ключём.
+
+### Линтеры и форматтеры
+
+Для запуска линтеров необходимо установить [pre-commit](https://pre-commit.com/). Линтеры запускаются командой `$ pre-commit run -a`.
+
+#### Настройка `pre-commit`
+
+Github Actions запускаются в `stage: commit`, поэтому в `.pre-commit-config.yaml` проверка `id: no-commit-to-branch` установлена в `stage: push`. Что бы проверка запускалась локально и не срабатывала в CI. Локально надо установить pre-commit хуки на пуши и на коммиты следующей командой:
+
+```bash
+$ pre-commit install --hook-type pre-commit --hook-type pre-push
+```
