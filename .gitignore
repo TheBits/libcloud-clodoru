@@ -1,6 +1,10 @@
 *.py[cod]
 .envrc
+*.egg-info/
 __pycache__/
+build/
 .direnv/
 .tox/
 .vscode/
+bin/
+.coverage
