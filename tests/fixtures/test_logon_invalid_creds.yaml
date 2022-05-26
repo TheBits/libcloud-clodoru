@@ -1,0 +1,51 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip,deflate
+      Connection:
+      - keep-alive
+      Host:
+      - api.clodo.ru
+      User-Agent:
+      - 'libcloud/3.5.1 '
+    method: GET
+    uri: https://api.clodo.ru/
+  response:
+    body:
+      string: '{"code":401,"message":"Unauthorized","details":"\u041d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u0430
+        \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044f"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Authorization, Content-Type, x-auth-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Max-Age:
+      - '86400'
+      Cache-Control:
+      - no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 26 May 2022 05:34:27 GMT
+      HOST_FULL_NAME:
+      - wn00.mn.clodo.ru
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Transfer-Encoding:
+      - chunked
+      X-Auth-Token:
+      - '[REDACTED]'
+    status:
+      code: 401
+      message: Unauthorized
+version: 1
