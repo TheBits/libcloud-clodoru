@@ -1,6 +1,6 @@
 from libcloud.common.base import ConnectionUserAndKey, JsonResponse
 from libcloud.common.types import InvalidCredsError
-from libcloud.compute.base import NodeDriver
+from libcloud.compute.base import NodeDriver, NodeImage
 from libcloud.utils.py3 import httplib
 
 
@@ -38,12 +38,9 @@ class ClodoConnection(ConnectionUserAndKey):
             kwargs["url"] = "https://api.clodo.ru/"
         super().__init__(*args, **kwargs)
 
-        user = kwargs.pop("user_id", None)
-        key = kwargs.pop("key", None)
-
         headers = {
-            "X-Auth-User": user,
-            "X-Auth-Key": key,
+            "X-Auth-User": self.user_id,
+            "X-Auth-Key": self.key,
         }
 
         response = self.request(
@@ -58,9 +55,22 @@ class ClodoConnection(ConnectionUserAndKey):
         self.token_expired = response.headers["X-Auth-Token-Expired".lower()]
         self.token_issued = response.headers["X-Auth-Token-Issued".lower()]
 
+        # TODO: удалять self.conntion что бы пересоздать кооннект на новый base_url
+        self.base_url = response.headers["X-Server-Management-Url".lower()]
+
 
 class ClodoDriver(NodeDriver):
     connectionCls = ClodoConnection
     name = "Clodo"
     website = "https://clodo.ru/"
+
     # TODO: NODE_STATE_MAP
+
+    def list_images(self, location=None):
+        images = []
+        response = self.connection.request("v1/images")
+        for image in response.object["images"]:
+            image_id = image.pop("id")
+            image_name = image.pop("name")
+            images.append(NodeImage(image_id, image_name, self, extra=image))
+        return images
