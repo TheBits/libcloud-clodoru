@@ -1,0 +1,140 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip,deflate
+      Connection:
+      - keep-alive
+      Host:
+      - api.clodo.ru
+      User-Agent:
+      - 'libcloud/3.5.1 '
+    method: GET
+    uri: https://api.clodo.ru/
+  response:
+    body:
+      string: ''
+    headers:
+      Access-Control-Allow-Headers:
+      - Authorization, Content-Type, x-auth-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Max-Age:
+      - '86400'
+      Cache-Control:
+      - no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 27 May 2022 16:28:19 GMT
+      HOST_FULL_NAME:
+      - wn00.mn.clodo.ru
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      X-Auth-Token:
+      - '[REDACTED]'
+      X-Auth-Token-Expired:
+      - 2022-05-27T19:48:19+0300
+      X-Auth-Token-Issued:
+      - 2022-05-27T19:28:19+0300
+      X-Server-Management-Url:
+      - https://api.clodo.ru/v1
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip,deflate
+      Connection:
+      - keep-alive
+      Host:
+      - api.clodo.ru
+      User-Agent:
+      - 'libcloud/3.5.1 (Clodo) '
+    method: GET
+    uri: https://api.clodo.ru/v1/images
+  response:
+    body:
+      string: '{"images":[{"id":"1988","name":"Debian 9 32 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1990","name":"Debian
+        9 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2022","name":"Debian
+        10 32 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2024","name":"Debian
+        10 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2048","name":"Debian
+        11 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1091","name":"CentOS
+        6 32 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1101","name":"CentOS
+        6 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1828","name":"CentOS
+        7 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1986","name":"CentOS
+        7 32 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2028","name":"CentOS
+        8 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1866","name":"Ubuntu
+        14.04 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1968","name":"Ubuntu
+        16.04 32 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1970","name":"Ubuntu
+        16.04 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1996","name":"Ubuntu
+        18.04 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2030","name":"Ubuntu
+        20.04 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2056","name":"Ubuntu
+        22.04 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1888","name":"Gentoo
+        current 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1848","name":"Arch
+        Linux current 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2044","name":"Fedora
+        34 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2050","name":"Fedora
+        35 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1651","name":"openSUSE
+        tumbleweed 32 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1661","name":"openSUSE
+        tumbleweed 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1862","name":"openSUSE
+        leap 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2032","name":"FreeBSD
+        12 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2006","name":"LAMP
+        ubuntu-16.04 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2008","name":"LAMP
+        ubuntu-18.04 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1982","name":"1\u0421:
+        \u0411\u0438\u0442\u0440\u0438\u043a\u0441 7 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1940","name":"ISPmanager-Lite
+        centos7 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1950","name":"ISPmanager-Business  centos7
+        64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1902","name":"CoreOS
+        stable 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1906","name":"WordPress
+        current 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2052","name":"Joomla
+        current 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1910","name":"Docker
+        current 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1920","name":"OpenCart
+        2 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1984","name":"OpenCart
+        3 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1924","name":"ModX
+        current 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1928","name":"Drupal
+        7 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2004","name":"Drupal
+        8 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1936","name":"Redmine
+        current 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"1938","name":"LiveStreet
+        3 64 bits","vps_type":"VirtualServer","status":"ACTIVE"},{"id":"2046","name":"Rocky
+        Linux 8 64 bits","vps_type":"VirtualServer","status":"ACTIVE"}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Authorization, Content-Type, x-auth-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Max-Age:
+      - '86400'
+      Cache-Control:
+      - no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 27 May 2022 16:28:20 GMT
+      HOST_FULL_NAME:
+      - wn00.ix.clodo.ru
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
+version: 1

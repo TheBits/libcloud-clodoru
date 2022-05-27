@@ -8,7 +8,7 @@ import pytest
 import vcr
 from libcloud.common.types import InvalidCredsError
 
-from libcloudclodoru import ClodoConnection
+from libcloudclodoru import ClodoConnection, ClodoDriver
 
 
 @pytest.fixture()
@@ -37,33 +37,19 @@ def filter_response(response):
     except KeyError:
         pass
 
-    response["headers"]["X-Auth-Token"] = ["[REDACTED]"]
+    if response["headers"].get("X-Auth-Token") is not None:
+        response["headers"]["X-Auth-Token"] = ["[REDACTED]"]
 
     return response
 
 
 def vcr_record(f):
-    # > X-Auth-User: [REDACTED]
-    # > X-Auth-Key: [REDACTED]
-    filter_query = (
-        ("username", "USERNAME"),
-        ("password", "PASSWORD"),
-        ("key", "KEY"),
-        ("sessionToken", "SESSION_TOKEN"),
-    )
-
-    # < X-Server-Management-Url: https://api.clodo.ru/v1
-    # < X-Auth-Token: [REDACTED]
-    # < X-Auth-Token-Expired: 2022-05-02T16:38:15+0300
-    # < X-Auth-Token-Issued: 2022-05-02T16:18:15+0300
-
     @functools.wraps(f)
     def wrapper(*args, **kwds):
         path = Path("./tests/fixtures/") / f"{f.__name__}.yaml"
         kwargs = dict(
             filter_post_data_parameters=cred_keys,
-            filter_query_parameters=filter_query,
-            filter_headers=("X-Auth-Key", "X-Auth-User"),
+            filter_headers=("X-Auth-Key", "X-Auth-User", "X-Auth-Token"),
             match_on=["method", "path"],
             path=str(path),
         )
@@ -87,3 +73,12 @@ def test_logon_ok(credentials):
 def test_logon_invalid_creds():
     with pytest.raises(InvalidCredsError):
         ClodoConnection(key="123", user_id="abc")
+
+
+@vcr_record
+def test_compute_list_images(credentials):
+    clodo = ClodoDriver(credentials.user_id, credentials.key)
+    images = clodo.list_images()
+    image = images[0]
+    assert image.id == "1988"
+    assert image.name == "Debian 9 32 bits"
