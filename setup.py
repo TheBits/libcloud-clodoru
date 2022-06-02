@@ -20,6 +20,6 @@ setuptools.setup(
         "Intended Audience :: System Administrators",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: System :: Systems Administration",
     ],
 )
