@@ -28,9 +28,6 @@ def credentials() -> Tuple[str, str]:
     return creds
 
 
-cred_keys = ("username", "password", "key")
-
-
 def filter_response(response):
     try:
         del response["headers"]["Set-Cookie"]
@@ -48,7 +45,6 @@ def vcr_record(f):
     def wrapper(*args, **kwds):
         path = Path("./tests/fixtures/") / f"{f.__name__}.yaml"
         kwargs = dict(
-            filter_post_data_parameters=cred_keys,
             filter_headers=("X-Auth-Key", "X-Auth-User", "X-Auth-Token"),
             match_on=["method", "path"],
             path=str(path),
