@@ -15,6 +15,7 @@ setuptools.setup(
     url="https://github.com/thebits/libcloud-clodoru",
     install_requires=["apache-libcloud>=3.0.0"],
     packages=setuptools.find_packages(),
+    python_requires=">=3.6",
     classifiers=[
         "Intended Audience :: System Administrators",
         "Operating System :: OS Independent",
