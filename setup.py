@@ -1,16 +1,22 @@
+import textwrap
+
 import setuptools
 
-with open("README.md") as fh:
-    long_description = fh.read()
+long_description = """
+[Libcloud](https://libcloud.apache.org/) driver for provdier clodo.ru.
+
+For all available methods, see [README at github](https://github.com/thebits/libcloud-clodoru).
+"""
+
 
 setuptools.setup(
     name="libcloudclodoru",
-    version="0.0.1",
+    version="0.0.2",
     author="Sergey Mezentsev",
     author_email="thebits@yandex.ru",
-    description="Libcloud driver for clodoru",
+    description="Libcloud driver for provdier clodo.ru",
     license="UNLICENSE",
-    long_description=long_description,
+    long_description=textwrap.dedent(long_description),
     long_description_content_type="text/markdown",
     url="https://github.com/thebits/libcloud-clodoru",
     install_requires=["apache-libcloud>=3.0.0"],
