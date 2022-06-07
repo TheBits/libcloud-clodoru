@@ -101,3 +101,6 @@ class ClodoDNSDriver(DNSDriver):
             )
             zones.append(zone)
         return zones
+
+    def list_zones(self):
+        return self.iterate_zones()
