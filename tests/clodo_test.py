@@ -8,7 +8,7 @@ import pytest
 import vcr
 from libcloud.common.types import InvalidCredsError
 
-from libcloudclodoru import ClodoConnection, ClodoDriver
+from libcloudclodoru import ClodoConnection, ClodoDNSDriver, ClodoDriver
 
 
 @pytest.fixture()
@@ -78,3 +78,14 @@ def test_compute_list_images(credentials):
     image = images[0]
     assert image.id == "1988"
     assert image.name == "Debian 9 32 bits"
+
+
+@vcr_record
+def test_dns_iterate_zones(credentials):
+    clodo = ClodoDNSDriver(credentials.user_id, credentials.key)
+    zones = clodo.iterate_zones()
+    assert len(zones) == 2
+    zone = zones[0]
+    assert zone.id == "405290"
+    assert zone.domain == "example1.ru"
+    assert zone.type == "MASTER"

@@ -1,0 +1,104 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip,deflate
+      Connection:
+      - keep-alive
+      Host:
+      - api.clodo.ru
+      User-Agent:
+      - 'libcloud/3.6.0 '
+    method: GET
+    uri: https://api.clodo.ru/
+  response:
+    body:
+      string: ''
+    headers:
+      Access-Control-Allow-Headers:
+      - Authorization, Content-Type, x-auth-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Max-Age:
+      - '86400'
+      Cache-Control:
+      - no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 07 Jun 2022 21:01:46 GMT
+      HOST_FULL_NAME:
+      - wn00.mn.clodo.ru
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      X-Auth-Token:
+      - '[REDACTED]'
+      X-Auth-Token-Expired:
+      - 2022-06-08T00:21:46+0300
+      X-Auth-Token-Issued:
+      - 2022-06-08T00:01:46+0300
+      X-Server-Management-Url:
+      - https://api.clodo.ru/v1
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip,deflate
+      Connection:
+      - keep-alive
+      Host:
+      - api.clodo.ru
+      User-Agent:
+      - 'libcloud/3.6.0 (Clodo) '
+    method: GET
+    uri: https://api.clodo.ru/v1/dns
+  response:
+    body:
+      string: '{"dns":{"domains":[{"id":"405290","name":"example1.ru","type":"MASTER","records_count":"7","unchecked":"0","unchecked_expire":"30.11.-0001
+        00:00"},{"id":"207821","name":"example2.ru","type":"MASTER","records_count":"7","unchecked":"0","unchecked_expire":"30.11.-0001
+        00:00"}],"domains_check":[],"reverse":[{"ip_value":"[REDACTED]","virtual_mashines_title":"VPS
+        REDACTED-REDACTED","resellers_id":"0","reverse_value":"REDACTED.in-addr.arpa","domain_value":"REDACTED-REDACTED.vm.clodoserver.ru.","id":"799651"}],"vps_list":[{"virtual_mashines_title":"VPS
+        REDACTED-REDACTED (REDACTED)","ip_value":"REDACTED"}]}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Authorization, Content-Type, x-auth-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Max-Age:
+      - '86400'
+      Cache-Control:
+      - no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 07 Jun 2022 21:01:47 GMT
+      HOST_FULL_NAME:
+      - wn00.ix.clodo.ru
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
+version: 1
