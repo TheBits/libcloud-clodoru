@@ -64,7 +64,7 @@ class ClodoDriver(NodeDriver):
     name = "Clodo"
     website = "https://clodo.ru/"
 
-    # TODO: NODE_STATE_MAP
+    # TODO: NODE_STATE_MAP https://github.com/TheBits/libcloud-clodoru/issues/22
 
     def list_images(self, location=None):
         images = []

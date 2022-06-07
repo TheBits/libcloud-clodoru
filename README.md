@@ -20,14 +20,14 @@
 
 | Метод                                                                                                                                | Поддержка |
 | ------------------------------------------------------------------------------------------------------------------------------------ | --------- |
-| [create_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.create_node)               |           |
+| [create_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.create_node)               | #15       |
 | [deploy_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.deploy_node)               |           |
-| [destroy_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.destroy_node)             |           |
+| [destroy_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.destroy_node)             | #19       |
 | [features](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.features)                     |           |
-| [list_nodes](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.list_nodes)                 |           |
-| [reboot_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.reboot_node)               |           |
-| [start_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.start_node)                 |           |
-| [stop_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.stop_node)                   |           |
+| [list_nodes](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.list_nodes)                 | #20       |
+| [reboot_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.reboot_node)               | #21       |
+| [start_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.start_node)                 | #21       |
+| [stop_node](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.stop_node)                   | #21       |
 | [wait_until_running](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.wait_until_running) |           |
 
 ### Управление образами
@@ -38,7 +38,7 @@
 | [create_image](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.create_image) |           |
 | [delete_image](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.delete_image) |           |
 | [get_image](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.get_image)       |           |
-| [list_images](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.list_images)   |           |
+| [list_images](https://libcloud.readthedocs.io/en/stable/compute/api.html#libcloud.compute.base.NodeDriver.list_images)   | done      |
 
 ### Управление дисками
 
