@@ -1,6 +1,7 @@
 from libcloud.common.base import ConnectionUserAndKey, JsonResponse
 from libcloud.common.types import InvalidCredsError
 from libcloud.compute.base import NodeDriver, NodeImage
+from libcloud.dns.base import DNSDriver, Zone
 from libcloud.utils.py3 import httplib
 
 
@@ -74,3 +75,29 @@ class ClodoDriver(NodeDriver):
             image_name = image.pop("name")
             images.append(NodeImage(image_id, image_name, self, extra=image))
         return images
+
+
+class ClodoDNSDriver(DNSDriver):
+    connectionCls = ClodoConnection
+    name = "Clodo"
+    website = "https://clodo.ru/"
+
+    # TODO: RECORD_TYPE_MAP
+
+    def iterate_zones(self):
+        zones = []
+        response = self.connection.request("v1/dns")
+        for element in response.object["dns"]["domains"]:
+            zone_id = element.pop("id")
+            domain = element.pop("name")
+            zone_type = element.pop("type")
+            zone = Zone(
+                id=zone_id,
+                domain=domain,
+                type=zone_type,
+                ttl=None,
+                driver=self,
+                extra=element,
+            )
+            zones.append(zone)
+        return zones
