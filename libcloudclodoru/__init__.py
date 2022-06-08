@@ -1,6 +1,7 @@
 from libcloud.common.base import ConnectionUserAndKey, JsonResponse
 from libcloud.common.types import InvalidCredsError
 from libcloud.compute.base import Node, NodeDriver, NodeImage
+from libcloud.compute.types import NodeState
 from libcloud.dns.base import DNSDriver, Zone
 from libcloud.utils.py3 import httplib
 
@@ -65,6 +66,13 @@ class ClodoDriver(NodeDriver):
     name = "Clodo"
     website = "https://clodo.ru/"
 
+    NODE_STATE_MAP = {
+        "is_running": NodeState.RUNNING,
+        "is_stopped": NodeState.STOPPED,
+        "billing": NodeState.SUSPENDED,
+        "queued": NodeState.PENDING,
+    }
+
     # TODO: NODE_STATE_MAP https://github.com/TheBits/libcloud-clodoru/issues/22
 
     def list_images(self, location=None):
@@ -92,6 +100,40 @@ class ClodoDriver(NodeDriver):
 
     def stop_node(self, node: Node) -> bool:
         return self._make_action(node.id, "stop")
+
+    def list_nodes(self):
+        response = self.connection.request("v1/servers")
+        nodes = []
+        for n in response.object.get("servers", {}).get("server", []):
+            state = self.NODE_STATE_MAP.get(n["status"], NodeState.UNKNOWN)
+
+            private_ips = []
+            private_addresses = n.get("addresses", {}).get("private", {})
+            if private_addresses:
+                for addr in private_addresses.get("ip").items():
+                    private_ips.append(addr.get("addr"))
+
+            public_ips = []
+            public_addresses = n.get("addresses", {}).get("public", {})
+            if public_addresses:
+                for addr in public_addresses.get("ip"):
+                    private_ips.append(addr.get("addr"))
+
+            image = NodeImage(n["imageId"], name=n["os_type"], driver=self)
+
+            node = Node(
+                id=n["id"],
+                name=n["name"],
+                state=state,
+                public_ips=public_ips,
+                private_ips=private_ips,
+                driver=self,
+                image=image,
+                extra=n,
+            )
+            nodes.append(node)
+        return nodes
+
 
     def destroy_node(self, node: Node) -> bool:
         response = self.connection.request("v1/servers/{id}".format(id=node.id), method="DELETE")
