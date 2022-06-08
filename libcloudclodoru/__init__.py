@@ -77,7 +77,11 @@ class ClodoDriver(NodeDriver):
         return images
 
     def _make_action(self, node_id: int, action: str) -> bool:
-        response = self.connection.request("v1/servers/{id}/action".format(id=node_id), data={action: ""})
+        response = self.connection.request(
+            "v1/servers/{id}/action".format(id=node_id),
+            data={action: ""},
+            method="POST",
+        )
         return response.status == httplib.NO_CONTENT
 
     def start_node(self, node: Node) -> bool:

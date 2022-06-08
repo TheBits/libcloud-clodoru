@@ -64,7 +64,7 @@ interactions:
       - api.clodo.ru
       User-Agent:
       - 'libcloud/3.5.1 (Clodo) '
-    method: GET
+    method: POST
     uri: https://api.clodo.ru/v1/servers/1/action
   response:
     body:
