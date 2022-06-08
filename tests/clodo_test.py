@@ -7,6 +7,8 @@ from typing import Tuple
 import pytest
 import vcr
 from libcloud.common.types import InvalidCredsError
+from libcloud.compute.base import Node
+from libcloud.compute.types import NodeState
 
 from libcloudclodoru import ClodoConnection, ClodoDNSDriver, ClodoDriver
 
@@ -89,3 +91,27 @@ def test_dns_iterate_zones(credentials):
     assert zone.id == "405290"
     assert zone.domain == "example1.ru"
     assert zone.type == "MASTER"
+
+
+@vcr_record
+def test_start_node(credentials):
+    clodo = ClodoDriver(credentials.user_id, credentials.key)
+    node = Node(id="1", name="test", state=NodeState.RUNNING, driver=clodo, private_ips=[], public_ips=[])
+    result = clodo.start_node(node)
+    assert result is True
+
+
+@vcr_record
+def test_stop_node(credentials):
+    clodo = ClodoDriver(credentials.user_id, credentials.key)
+    node = Node(id="1", name="test", state=NodeState.RUNNING, driver=clodo, private_ips=[], public_ips=[])
+    result = clodo.start_node(node)
+    assert result is True
+
+
+@vcr_record
+def test_reboot_node(credentials):
+    clodo = ClodoDriver(credentials.user_id, credentials.key)
+    node = Node(id="1", name="test", state=NodeState.RUNNING, driver=clodo, private_ips=[], public_ips=[])
+    result = clodo.start_node(node)
+    assert result is True
