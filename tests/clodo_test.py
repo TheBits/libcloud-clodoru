@@ -115,3 +115,11 @@ def test_reboot_node(credentials):
     node = Node(id="1", name="test", state=NodeState.RUNNING, driver=clodo, private_ips=[], public_ips=[])
     result = clodo.start_node(node)
     assert result is True
+
+
+@vcr_record
+def test_destroy_node(credentials):
+    clodo = ClodoDriver(credentials.user_id, credentials.key)
+    node = Node(id="1", name="test", state=NodeState.RUNNING, driver=clodo, private_ips=[], public_ips=[])
+    response = clodo.destroy_node(node)
+    assert response is True
