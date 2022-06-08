@@ -117,6 +117,10 @@ class ClodoDriver(NodeDriver):
             nodes.append(node)
         return nodes
 
+    def destroy_node(self, node: Node) -> bool:
+        response = self.connection.request("v1/servers/{id}".format(id=node.id), method="DELETE")
+        return response.status == httplib.NO_CONTENT
+
 
 class ClodoDNSDriver(DNSDriver):
     connectionCls = ClodoConnection

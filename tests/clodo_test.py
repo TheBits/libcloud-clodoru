@@ -7,6 +7,8 @@ from typing import Tuple
 import pytest
 import vcr
 from libcloud.common.types import InvalidCredsError
+from libcloud.compute.base import Node
+from libcloud.compute.types import NodeState
 
 from libcloudclodoru import ClodoConnection, ClodoDNSDriver, ClodoDriver
 
@@ -99,3 +101,11 @@ def test_compute_list_nodes(credentials):
     node1 = nodes[0]
     assert node1.id == "60"
     assert node1.image.id == "561"
+
+
+@vcr_record
+def test_destroy_node(credentials):
+    clodo = ClodoDriver(credentials.user_id, credentials.key)
+    node = Node(id="1", name="test", state=NodeState.RUNNING, driver=clodo, private_ips=[], public_ips=[])
+    response = clodo.destroy_node(node)
+    assert response is True
