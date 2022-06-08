@@ -84,6 +84,23 @@ class ClodoDriver(NodeDriver):
             images.append(NodeImage(image_id, image_name, self, extra=image))
         return images
 
+    def _make_action(self, node_id: int, action: str) -> bool:
+        response = self.connection.request(
+            "v1/servers/{id}/action".format(id=node_id),
+            data={action: ""},
+            method="POST",
+        )
+        return response.status == httplib.NO_CONTENT
+
+    def start_node(self, node: Node) -> bool:
+        return self._make_action(node.id, "start")
+
+    def reboot_node(self, node: Node) -> bool:
+        return self._make_action(node.id, "reboot")
+
+    def stop_node(self, node: Node) -> bool:
+        return self._make_action(node.id, "stop")
+
     def list_nodes(self):
         response = self.connection.request("v1/servers")
         nodes = []
@@ -116,6 +133,7 @@ class ClodoDriver(NodeDriver):
             )
             nodes.append(node)
         return nodes
+
 
     def destroy_node(self, node: Node) -> bool:
         response = self.connection.request("v1/servers/{id}".format(id=node.id), method="DELETE")
