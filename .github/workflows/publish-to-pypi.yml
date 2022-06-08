@@ -12,7 +12,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
       - name: Install pypa/build
-        run: python -m pip install --progress-bar off --user build
+        run: python -m pip install --disable-pip-version-check --progress-bar off --user build
       - name: Build a binary wheel and a source tarball
         run: python -m build --sdist --wheel --outdir dist/ .
       - name: Publish distribution 📦 to PyPI
