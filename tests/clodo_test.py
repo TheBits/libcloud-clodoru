@@ -89,3 +89,13 @@ def test_dns_iterate_zones(credentials):
     assert zone.id == "405290"
     assert zone.domain == "example1.ru"
     assert zone.type == "MASTER"
+
+
+@vcr_record
+def test_compute_list_nodes(credentials):
+    clodo = ClodoDriver(credentials.user_id, credentials.key)
+    nodes = clodo.list_nodes()
+    assert len(nodes) == 2
+    node1 = nodes[0]
+    assert node1.id == "60"
+    assert node1.image.id == "561"
