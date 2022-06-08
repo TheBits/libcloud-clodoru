@@ -94,6 +94,16 @@ def test_dns_iterate_zones(credentials):
 
 
 @vcr_record
+def test_compute_list_nodes(credentials):
+    clodo = ClodoDriver(credentials.user_id, credentials.key)
+    nodes = clodo.list_nodes()
+    assert len(nodes) == 2
+    node1 = nodes[0]
+    assert node1.id == "60"
+    assert node1.image.id == "561"
+
+
+@vcr_record
 def test_destroy_node(credentials):
     clodo = ClodoDriver(credentials.user_id, credentials.key)
     node = Node(id="1", name="test", state=NodeState.RUNNING, driver=clodo, private_ips=[], public_ips=[])
