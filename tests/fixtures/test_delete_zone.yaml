@@ -1,0 +1,100 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip,deflate
+      Connection:
+      - keep-alive
+      Host:
+      - api.clodo.ru
+      User-Agent:
+      - 'libcloud/3.5.1 '
+    method: GET
+    uri: https://api.clodo.ru/
+  response:
+    body:
+      string: ''
+    headers:
+      Access-Control-Allow-Headers:
+      - Authorization, Content-Type, x-auth-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Max-Age:
+      - '86400'
+      Cache-Control:
+      - no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 27 May 2022 16:28:19 GMT
+      HOST_FULL_NAME:
+      - wn00.mn.clodo.ru
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      X-Auth-Token:
+      - '[REDACTED]'
+      X-Auth-Token-Expired:
+      - 2022-05-27T19:48:19+0300
+      X-Auth-Token-Issued:
+      - 2022-05-27T19:28:19+0300
+      X-Server-Management-Url:
+      - https://api.clodo.ru/v1
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip,deflate
+      Connection:
+      - keep-alive
+      Host:
+      - api.clodo.ru
+      User-Agent:
+      - 'libcloud/3.5.1 (Clodo) '
+    method: DELETE
+    uri: https://api.clodo.ru/v1/dns/1
+  response:
+    body:
+      string: ''
+    headers:
+      Access-Control-Allow-Headers:
+      - Authorization, Content-Type, x-auth-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Max-Age:
+      - '86400'
+      Cache-Control:
+      - no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 27 May 2022 16:28:20 GMT
+      HOST_FULL_NAME:
+      - wn00.ix.clodo.ru
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 204
+      message: OK
+version: 1

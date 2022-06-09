@@ -134,7 +134,6 @@ class ClodoDriver(NodeDriver):
             nodes.append(node)
         return nodes
 
-
     def destroy_node(self, node: Node) -> bool:
         response = self.connection.request("v1/servers/{id}".format(id=node.id), method="DELETE")
         return response.status == httplib.NO_CONTENT
@@ -167,3 +166,7 @@ class ClodoDNSDriver(DNSDriver):
 
     def list_zones(self):
         return self.iterate_zones()
+
+    def delete_zone(self, zone: Zone) -> bool:
+        response = self.connection.request("v1/dns/{id}".format(id=zone.id), method="DELETE")
+        return response.status == httplib.NO_CONTENT
