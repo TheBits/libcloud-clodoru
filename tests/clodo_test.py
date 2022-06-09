@@ -9,7 +9,8 @@ import vcr
 from libcloud.common.types import InvalidCredsError
 from libcloud.compute.base import Node
 from libcloud.compute.types import NodeState
-from libcloud.dns.base import Zone
+from libcloud.dns.base import Record, Zone
+from libcloud.dns.types import RecordType
 
 from libcloudclodoru import ClodoConnection, ClodoDNSDriver, ClodoDriver
 
@@ -100,6 +101,15 @@ def test_update_zone(credentials):
     zone = Zone(id="1", domain="test", type="test", ttl=1, driver=clodo)
     response = clodo.update_zone(zone, "test2")
     assert response is True
+
+
+@vcr_record
+def test_delete_record(credentials):
+    clodo = ClodoDNSDriver(credentials.user_id, credentials.key)
+    zone = Zone(id="1", domain="test.ru", type="test", ttl=1, driver=clodo)
+    record = Record(id="1", name="test", type=RecordType.AAAA, data="test", zone=zone, driver=clodo)
+    result = clodo.delete_record(record)
+    assert result is True
 
 
 @vcr_record
