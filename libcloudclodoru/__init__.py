@@ -2,7 +2,7 @@ from libcloud.common.base import ConnectionUserAndKey, JsonResponse
 from libcloud.common.types import InvalidCredsError
 from libcloud.compute.base import Node, NodeDriver, NodeImage
 from libcloud.compute.types import NodeState
-from libcloud.dns.base import DNSDriver, Zone
+from libcloud.dns.base import DNSDriver, Record, Zone
 from libcloud.utils.py3 import httplib
 
 
@@ -134,7 +134,6 @@ class ClodoDriver(NodeDriver):
             nodes.append(node)
         return nodes
 
-
     def destroy_node(self, node: Node) -> bool:
         response = self.connection.request("v1/servers/{id}".format(id=node.id), method="DELETE")
         return response.status == httplib.NO_CONTENT
@@ -167,3 +166,7 @@ class ClodoDNSDriver(DNSDriver):
 
     def list_zones(self):
         return self.iterate_zones()
+
+    def delete_record(self, record: Record) -> bool:
+        response = self.connection.request("v1/dns/{id}".format(id=record.id), method="DELETE")
+        return response.status == httplib.NO_CONTENT
