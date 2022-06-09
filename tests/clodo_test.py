@@ -94,6 +94,17 @@ def test_dns_iterate_zones(credentials):
 
 
 @vcr_record
+def test_create_zone(credentials):
+    clodo = ClodoDNSDriver(credentials.user_id, credentials.key)
+    domain = "example1.ru"
+    zone_type = "MASTER"
+    zone = clodo.create_zone(domain, zone_type)
+    assert zone.id == "1"
+    assert zone.domain == domain
+    assert zone.type == zone_type
+
+
+@vcr_record
 def test_start_node(credentials):
     clodo = ClodoDriver(credentials.user_id, credentials.key)
     node = Node(id="1", name="test", state=NodeState.RUNNING, driver=clodo, private_ips=[], public_ips=[])
