@@ -1,3 +1,5 @@
+from typing import Optional
+
 from libcloud.common.base import ConnectionUserAndKey, JsonResponse
 from libcloud.common.types import InvalidCredsError
 from libcloud.compute.base import Node, NodeDriver, NodeImage
@@ -166,6 +168,25 @@ class ClodoDNSDriver(DNSDriver):
 
     def list_zones(self):
         return self.iterate_zones()
+
+    def update_zone(
+        self,
+        zone: Zone,
+        domain: str,
+        type: Optional[str] = "master",
+        ttl: Optional[int] = None,
+        extra: Optional[dict] = None,
+    ) -> Zone:
+        body = {
+            "name": domain,
+            "type": type,
+            "ttl": ttl,
+            "id": zone.id,
+        }
+        if extra and extra.get("domain_master") is not None:
+            body["domain_master"] = extra.get("domain_master")
+        response = self.connection.request("v1/dns/{id}".format(id=zone.id), data=body, method="POST")
+        return response.status == httplib.NO_CONTENT
 
     def delete_record(self, record: Record) -> bool:
         response = self.connection.request("v1/dns/{id}".format(id=record.id), method="DELETE")
