@@ -96,6 +96,14 @@ def test_dns_iterate_zones(credentials):
 
 
 @vcr_record
+def test_delete_zone(credentials):
+    clodo = ClodoDNSDriver(credentials.user_id, credentials.key)
+    zone = Zone(id="1", domain="test", type="test", ttl=1, driver=clodo)
+    result = clodo.delete_zone(zone)
+    assert result is True
+
+
+@vcr_record
 def test_create_zone(credentials):
     clodo = ClodoDNSDriver(credentials.user_id, credentials.key)
     domain = "example1.ru"
