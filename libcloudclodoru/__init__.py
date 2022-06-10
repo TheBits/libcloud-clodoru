@@ -2,7 +2,7 @@ from typing import Dict, Optional
 
 from libcloud.common.base import ConnectionUserAndKey, JsonResponse
 from libcloud.common.types import InvalidCredsError
-from libcloud.compute.base import Node, NodeDriver, NodeImage
+from libcloud.compute.base import Node, NodeDriver, NodeImage, NodeLocation
 from libcloud.compute.types import NodeState
 from libcloud.dns.base import DNSDriver, Record, Zone
 from libcloud.utils.py3 import httplib
@@ -76,6 +76,25 @@ class ClodoDriver(NodeDriver):
     }
 
     # TODO: NODE_STATE_MAP https://github.com/TheBits/libcloud-clodoru/issues/22
+
+    def list_locations(self):
+        LOCATIONS = (
+            NodeLocation(
+                id="ix",
+                name="IXcellerate",
+                country="RU",
+                driver=self,
+                extra=dict(city="Moscow", api="api.ix.clodo.ru"),
+            ),
+            NodeLocation(
+                id="ix",
+                name="Miran",
+                country="RU",
+                driver=self,
+                extra=dict(city="St. Petersburg", api="api.mn.clodo.ru"),
+            ),
+        )
+        return LOCATIONS
 
     def list_images(self, location=None):
         images = []
