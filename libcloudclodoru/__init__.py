@@ -1,8 +1,10 @@
+from typing import Dict, Optional
+
 from libcloud.common.base import ConnectionUserAndKey, JsonResponse
 from libcloud.common.types import InvalidCredsError
 from libcloud.compute.base import Node, NodeDriver, NodeImage
 from libcloud.compute.types import NodeState
-from libcloud.dns.base import DNSDriver, Zone
+from libcloud.dns.base import DNSDriver, Record, Zone
 from libcloud.utils.py3 import httplib
 
 
@@ -179,3 +181,55 @@ class ClodoDNSDriver(DNSDriver):
             extra=data,
         )
         return zone
+
+    def delete_zone(self, zone: Zone) -> bool:
+        response = self.connection.request("v1/dns/{id}".format(id=zone.id), method="DELETE")
+        return response.status == httplib.NO_CONTENT
+
+    def create_zone(
+        self,
+        domain: str,
+        type: Optional[str] = "master",
+        ttl: Optional[int] = None,
+        extra: Optional[Dict] = None,
+    ) -> Zone:
+        body = {
+            "newdomain": domain,
+            "newdomain_type": type,
+        }
+        if extra and extra.get("slave_addr"):
+            body["slave_addr"] = extra.get("slave_addr")
+        response = self.connection.request("v1/dns", data=body, method="PUT")
+        response_data = response.object
+        created_zone = Zone(
+            id=response_data.get("id"),
+            type=type,
+            domain=domain,
+            ttl=ttl,
+            driver=self,
+            extra=response_data,
+        )
+        return created_zone
+
+    def update_zone(
+        self,
+        zone: Zone,
+        domain: str,
+        type: Optional[str] = "master",
+        ttl: Optional[int] = None,
+        extra: Optional[dict] = None,
+    ) -> Zone:
+        body = {
+            "name": domain,
+            "type": type,
+            "ttl": ttl,
+            "id": zone.id,
+        }
+        if extra and extra.get("domain_master") is not None:
+            body["domain_master"] = extra.get("domain_master")
+        response = self.connection.request("v1/dns/{id}".format(id=zone.id), data=body, method="POST")
+        return response.status == httplib.NO_CONTENT
+
+    def delete_record(self, record: Record) -> bool:
+        response = self.connection.request("v1/dns/{id}".format(id=record.id), method="DELETE")
+        return response.status == httplib.NO_CONTENT
