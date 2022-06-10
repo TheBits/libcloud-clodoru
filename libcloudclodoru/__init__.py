@@ -169,6 +169,19 @@ class ClodoDNSDriver(DNSDriver):
     def list_zones(self):
         return self.iterate_zones()
 
+    def get_zone(self, zone_id: str) -> Zone:
+        response = self.connection.request("v1/dns/{id}".format(id=zone_id))
+        data = response.object
+        zone = Zone(
+            id=zone_id,
+            domain=data.get("domain_id"),
+            type=data.get("type"),
+            ttl=data.get("ttl"),
+            driver=self,
+            extra=data,
+        )
+        return zone
+
     def delete_zone(self, zone: Zone) -> bool:
         response = self.connection.request("v1/dns/{id}".format(id=zone.id), method="DELETE")
         return response.status == httplib.NO_CONTENT
