@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Dict, Optional
 
 from libcloud.common.base import ConnectionUserAndKey, JsonResponse
 from libcloud.common.types import InvalidCredsError
@@ -168,6 +168,31 @@ class ClodoDNSDriver(DNSDriver):
 
     def list_zones(self):
         return self.iterate_zones()
+
+    def create_zone(
+        self,
+        domain: str,
+        type: Optional[str] = "master",
+        ttl: Optional[int] = None,
+        extra: Optional[Dict] = None,
+    ) -> Zone:
+        body = {
+            "newdomain": domain,
+            "newdomain_type": type,
+        }
+        if extra and extra.get("slave_addr"):
+            body["slave_addr"] = extra.get("slave_addr")
+        response = self.connection.request("v1/dns", data=body, method="PUT")
+        response_data = response.object
+        created_zone = Zone(
+            id=response_data.get("id"),
+            type=type,
+            domain=domain,
+            ttl=ttl,
+            driver=self,
+            extra=response_data,
+        )
+        return created_zone
 
     def update_zone(
         self,
